@@ -1,7 +1,7 @@
 /* Prima Mea Luna Roz 2026: pop-up de programare pe pachete, toate locatiile campaniei.
    Citeste sloturile libere exact ca formularul /Programari-online (POST get-hours, same-origin), combina cele doua servicii
    ale pachetului in aceeasi zi (intai consultul, pauza maxima 60 min), reverifica orele si trimite cererea pe canalul
-   formularului online (POST process_form): call center-ul suna si confirma; codul de reducere se aplica la receptie.
+   formularului online (POST process_form): call center-ul suna si confirma; receptia stie din cerere ca e campania (fara cod).
    Cand un medic nu are calendar online sau nicio zi nu se potriveste, pacienta alege o ZI PREFERATA + intervalul (ca optiunea
    „Selectati ziua preferata” a formularului) si call center-ul propune orele. Nu face programari direct in Medis.
    Se incarca din Continutul ofertei cu: <script src="https://www.gralmedical.ro/storage/luna-roz/luna-roz.js?v=2" defer></script>
@@ -197,7 +197,6 @@
       "bucuresti-p1": {
         titlu: "Pachetul 1: consult ginecologic + ecografie de sân",
         reducere: "40% reducere",
-        cod: "LUNAROZ40",
         clinica:
           "Clinica de Diagnostic GRAL, Str. Traian Popovici nr. 79-91, București",
         s1: { cheie: "consult", nume: "Consult ginecologic", medici: [146296] },
@@ -206,7 +205,6 @@
       "bucuresti-p2": {
         titlu: "Pachetul 2: consult ginecologic + mamografie 2D bilaterală",
         reducere: "35% reducere · mamografie gratuită cu bilet",
-        cod: "LUNAROZ35",
         clinica:
           "Clinica de Diagnostic GRAL și Clinica GRAL Radiologie, Str. Traian Popovici nr. 79-91, București",
         intrebare: "bilet",
@@ -220,7 +218,6 @@
       "chirurgie-consult": {
         titlu: "Consult gratuit de chirurgie plastică și reconstructivă",
         reducere: "gratuit pentru pacientele oncologice",
-        cod: "LUNAROZCHIR",
         clinica:
           "Centrul de Chirurgie GRAL, Str. Traian Popovici nr. 79-91, București",
         intrebare: "onco",
@@ -233,7 +230,6 @@
       "stefan-p1": {
         titlu: "Pachetul 1: consult ginecologic + ecografie de sân",
         reducere: "40% reducere",
-        cod: "LUNAROZ40",
         clinica:
           "Clinica GRAL Ștefan cel Mare, Șos. Ștefan cel Mare nr. 230, București",
         s1: { cheie: "consult", nume: "Consult ginecologic", medici: [146548] },
@@ -242,7 +238,6 @@
       "ploiesti-p1": {
         titlu: "Pachetul 1: consult ginecologic + ecografie de sân",
         reducere: "40% reducere",
-        cod: "LUNAROZ40",
         clinica: "Clinica MC GRAL Ploiești, Str. Cuza Vodă nr. 6",
         s1: {
           cheie: "consult",
@@ -254,7 +249,6 @@
       "ploiesti-p2": {
         titlu: "Pachetul 2: consult ginecologic + mamografie 2D bilaterală",
         reducere: "35% reducere · mamografie gratuită cu bilet",
-        cod: "LUNAROZ35",
         clinica: "Clinica MC GRAL Ploiești, Str. Cuza Vodă nr. 6",
         intrebare: "bilet_mf",
         s1: {
@@ -271,7 +265,6 @@
       "constanta-p1": {
         titlu: "Pachetul 1: consult ginecologic + ecografie mamară",
         reducere: "40% reducere",
-        cod: "LUNAROZ40",
         clinica: "Clinica GRAL Constanța, Bd. Alexandru Lăpușneanu nr. 87",
         s1: { cheie: "consult", nume: "Consult ginecologic", medici: [146575] },
         s2: { cheie: "eco", nume: "Ecografie mamară", medici: [146614] },
@@ -279,7 +272,6 @@
       "craiova-p1": {
         titlu: "Pachetul 1: consult ginecologic + ecografie de sân",
         reducere: "40% reducere",
-        cod: "LUNAROZ40",
         clinica: "Clinica OncoFort Craiova, Str. Brestei nr. 21",
         s1: { cheie: "consult", nume: "Consult ginecologic", medici: [144534] },
         s2: { cheie: "eco", nume: "Ecografie de sân", medici: [144534] },
@@ -287,7 +279,6 @@
       "pitesti-eco": {
         titlu: "Ecografie de sân cu 40% reducere",
         reducere: "40% reducere",
-        cod: "LUNAROZ40",
         clinica: "Clinica GRAL Pitești, Bd. Nicolae Bălcescu nr. 90",
         s1: { cheie: "eco", nume: "Ecografie de sân", medici: [144392] },
       },
@@ -547,7 +538,7 @@
     ".lr-gdpr{display:flex;gap:8px;align-items:flex-start;font-size:13px;margin:4px 0 12px}.lr-gdpr input{margin-top:4px;width:18px;height:18px;flex:none}" +
     ".lr-btn{display:block;width:100%;border:0;border-radius:6px;padding:14px 12px;font:inherit;font-weight:600;font-size:15px;color:#fff;background:#EC691F;cursor:pointer;min-height:44px;text-align:center;text-decoration:none;box-sizing:border-box}.lr-btn[disabled]{opacity:.6;cursor:wait}" +
     ".lr-btn2{display:inline-block;border:0;background:none;color:#2d4191;font:inherit;font-size:14px;text-decoration:underline;cursor:pointer;padding:10px 0;min-height:44px}" +
-    ".lr-err{color:#b3261e;font-size:13px;margin:6px 0 0}.lr-gol{color:#666;font-size:14px}.lr-ok{text-align:center;padding:10px 0}.lr-ok .lr-cod{font-size:26px;font-weight:800;color:#b3106c;letter-spacing:.06em;margin:6px 0}" +
+    ".lr-err{color:#b3261e;font-size:13px;margin:6px 0 0}.lr-gol{color:#666;font-size:14px}.lr-ok{text-align:center;padding:10px 0}.lr-ok .lr-ic{width:56px;height:56px;border-radius:50%;background:#ec1c8f;color:#fff;font-size:30px;line-height:56px;margin:0 auto 10px;font-weight:700}" +
     ".lr-tel{color:#2d4191;font-weight:600;white-space:nowrap}.lr-mic{font-size:13px;color:#666}";
 
   var st = null; // starea pop-up-ului curent
@@ -896,9 +887,7 @@
       '> Sunt de acord cu <a href="/protectia-datelor" target="_blank" rel="noopener">Politica de confidențialitate GRAL Medical</a> și cu prelucrarea datelor pentru această programare.</label>' +
       (err ? '<p class="lr-err" role="alert">' + esc(err) + "</p>" : "") +
       '<button type="submit" class="lr-btn" id="lr-trimite">Trimite cererea de programare</button>' +
-      '<p class="lr-mic" style="margin:10px 0 0">Un operator GRAL Medical te sună pentru confirmare. Reducerea se aplică la recepție, pe baza codului <b>' +
-      esc(p.cod) +
-      "</b>.</p></form>";
+      '<p class="lr-mic" style="margin:10px 0 0">Un operator GRAL Medical te sună pentru confirmare. Reducerea campaniei este inclusă în programare, nu ai nevoie de cod sau voucher.</p></form>';
     corp(h);
     $("#lr-alte-ore").onclick = function () {
       if (x.pref) pasPreferinta();
@@ -948,60 +937,78 @@
     return "";
   }
 
-  // Textul pentru operator (campul "Informatii suplimentare" al formularului online)
+  // Textul pentru operator (campul "Informatii suplimentare" al formularului online -> e-mailul catre call center).
+  // Etichete majuscule + un rand per informatie: lizibil si daca e-mailul uneste randurile. Fara coduri / vouchere.
+  function medicLoc(id) {
+    var m = CFG.medici[id];
+    return m.nume + (m.afisare ? ", " + m.afisare : "");
+  }
   function textObs(p, x, d) {
-    var t =
-      "Campania Prima Mea Luna Roz, " +
-      p.titlu +
-      " (" +
-      p.reducere +
-      "), cod de reducere " +
-      p.cod +
-      ". ";
+    var r = [
+      "CAMPANIA PRIMA MEA LUNA ROZ: " + p.titlu + " (" + p.reducere + ").",
+      "LOCATIA: " + p.clinica + ".",
+    ];
     if (x.pref) {
-      t +=
-        "Pacienta a ales din site ZIUA PREFERATA " +
-        ziFrumos(x.zi) +
-        ", interval " +
-        INTERVALE[x.interval] +
-        ", fara ore fixate: va rugam propuneti ore pentru " +
-        p.s1.nume +
-        " (" +
-        CFG.medici[x.a].nume +
-        ")" +
-        (p.s2
-          ? " si " +
-            p.s2.nume +
-            " (" +
-            CFG.medici[x.b].nume +
-            "), in aceeasi zi"
-          : "") +
-        ".";
+      r.push(
+        "ZI PREFERATA: " +
+          ziFrumos(x.zi) +
+          ", " +
+          INTERVALE[x.interval] +
+          " (pacienta nu a fixat ore).",
+      );
+      r.push(
+        "DE FACUT: sunati pacienta si propuneti ore pentru " +
+          p.s1.nume +
+          " (" +
+          medicLoc(x.a) +
+          ")" +
+          (p.s2
+            ? " si " +
+              p.s2.nume +
+              " (" +
+              medicLoc(x.b) +
+              "), in aceeasi zi, una dupa alta"
+            : "") +
+          ".",
+      );
     } else {
-      t +=
-        "Pacienta a ales din site, pentru " +
-        ziFrumos(x.zi) +
-        ": " +
-        p.s1.nume +
-        " ora " +
-        x.ha +
-        " cu " +
-        CFG.medici[x.a].nume;
-      if (p.s2)
-        t +=
-          "; " +
-          p.s2.nume +
-          " ora " +
-          x.hb +
-          " cu " +
-          CFG.medici[x.b].nume +
-          (x.b !== x.a ? " (" + CFG.medici[x.b].grad + ")" : "") +
-          ". Va rugam confirmati AMBELE programari in aceeasi zi.";
-      else t += ".";
+      r.push(
+        "PROGRAMAREA 1: " +
+          ziFrumos(x.zi) +
+          ", ora " +
+          x.ha +
+          ", " +
+          p.s1.nume +
+          ", " +
+          medicLoc(x.a) +
+          ".",
+      );
+      if (p.s2) {
+        r.push(
+          "PROGRAMAREA 2: aceeasi zi, ora " +
+            x.hb +
+            ", " +
+            p.s2.nume +
+            ", " +
+            medicLoc(x.b) +
+            ".",
+        );
+        r.push(
+          "DE FACUT: sunati pacienta si confirmati AMBELE programari in aceeasi zi (sau cele mai apropiate ore libere).",
+        );
+      } else {
+        r.push("DE FACUT: sunati pacienta si confirmati programarea.");
+      }
     }
     var q = p.intrebare && CFG.intrebari[p.intrebare];
-    if (q) t += " " + q.obs + ": " + (d.raspuns === "da" ? "DA" : "NU") + ".";
-    return t;
+    if (q)
+      r.push(
+        q.obs.toUpperCase() + ": " + (d.raspuns === "da" ? "DA" : "NU") + ".",
+      );
+    r.push(
+      "Reducerea campaniei se aplica la receptie; pacienta nu are cod sau voucher.",
+    );
+    return r.join("\n");
   }
 
   // Cererea completa, in formatul campurilor formularului online
@@ -1025,7 +1032,6 @@
     if (p.s2) servicii.push(serv(2, p.s2, x.b, x.hb));
     return {
       pachet: st.cheie,
-      cod: p.cod,
       mod: x.pref ? "preferinta" : "ore",
       zi: x.zi,
       zi_form: x.pref ? "" : ziForm(x.zi),
@@ -1101,9 +1107,7 @@
           (e && e.message ? e.message + " " : "") +
             "Dacă problema persistă, sună la " +
             CFG.telefon +
-            " și spune codul " +
-            p.cod +
-            ".",
+            " și spune că vrei o programare în campania Prima Mea Lună Roz.",
         );
       });
   }
@@ -1173,12 +1177,13 @@
         (p.s2 ? " și " + x.hb : "") +
         ")";
     corp(
-      '<div class="lr-ok"><p class="lr-pas">Cererea a fost trimisă</p><p>Te sună un operator GRAL Medical ' +
+      '<div class="lr-ok"><div class="lr-ic" aria-hidden="true">✓</div><p class="lr-pas">Cererea a fost trimisă</p><p>Te sună un operator GRAL Medical ' +
         ce +
         ".</p>" +
-        '<p class="lr-mic">Codul tău de reducere, de spus la recepție:</p><div class="lr-cod">' +
-        esc(p.cod) +
+        '<div class="lr-rez" style="text-align:left">' +
+        rezumatHtml(p, x) +
         "</div>" +
+        '<p class="lr-mic">Reducerea campaniei Prima Mea Lună Roz este inclusă; nu ai nevoie de cod sau voucher la recepție.</p>' +
         '<p class="lr-mic">Dacă nu te sunăm până mâine, apelează <a class="lr-tel" href="' +
         CFG.telHref +
         '">' +
