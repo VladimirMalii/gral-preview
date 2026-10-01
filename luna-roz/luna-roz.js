@@ -517,6 +517,7 @@
 
   /* ---------- interfata ---------- */
   var CSS =
+    ".lr-deschis #chtl-chat-icon-container,.lr-deschis .div-btn-media-chat{display:none!important}" +
     ".lr-fund{position:fixed;inset:0;background:rgba(26,26,46,.55);z-index:99990;display:flex;align-items:flex-end;justify-content:center;padding:0}" +
     "@media(min-width:640px){.lr-fund{align-items:center;padding:16px}}" +
     ".lr-cutie{background:#fff;width:100%;max-width:640px;max-height:92vh;overflow:auto;border-radius:14px 14px 0 0;font-family:Montserrat,Arial,sans-serif;color:#444;font-size:15px;line-height:1.5;box-shadow:0 12px 40px rgba(0,0,0,.25)}" +
@@ -575,6 +576,7 @@
       '<button type="button" class="lr-x" aria-label="Închide">&times;</button></div><div class="lr-corp" id="lr-corp"></div></div>';
     document.body.appendChild(fund);
     document.body.style.overflow = "hidden";
+    document.body.classList.add("lr-deschis"); // ascunde bula de chat a site-ului cat timp pop-up-ul e deschis (pe mobil acoperea butonul Trimite)
     $(".lr-x", fund).onclick = inchide;
     fund.addEventListener("click", function (e) {
       if (e.target === fund) inchide();
@@ -589,6 +591,7 @@
     var f = $("#lr-fund");
     if (f) f.parentNode.removeChild(f);
     document.body.style.overflow = "";
+    document.body.classList.remove("lr-deschis");
     document.removeEventListener("keydown", escInchide);
     if (st && st.focusInainte && st.focusInainte.focus) st.focusInainte.focus();
     st = null;
