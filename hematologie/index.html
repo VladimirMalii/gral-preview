@@ -415,7 +415,7 @@
 <div class="label-tag">Secția de Hematologie · <a href="https://www.gralmedical.ro/locatii/spitalul-oncofort-caloian">Spitalul OncoFort Caloian</a>, sector 3, București · GRAL Medical</div>
 <h2 style="color:#fff;font-size:clamp(1.85rem, 3.4vw, 2.9rem);font-weight:900;line-height:1.12;margin-bottom:16px;">Ai o analiză modificată?<br /><span style="color:#ec691f;">Aici afli ce înseamnă și ce urmează.</span></h2>
 <p style="color:rgba(255,255,255,0.82);font-size:15.5px;line-height:1.7;margin-bottom:22px;max-width:560px;">Hemoglobină mică, trombocite sau leucocite în afara valorilor, o „proteină M” pe care nu ți-a explicat-o nimeni: o cifră nu este un diagnostic. La Secția de Hematologie a Spitalului OncoFort Caloian, trei medici hematologi caută cauza, în aceeași echipă, de la prima consultație la tratament și monitorizare.</p>
-<div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px;"><button class="btn-orange" type="button" data-hem-open="hero">Spune-ne ce arată analizele</button><a class="btn-ghost" href="#cum-decurge">Cum decurge consultația</a></div>
+<div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px;"><button class="btn-orange" type="button" data-hem-open="hero">Spune-ne ce arată analizele</button><a class="btn-ghost" href="#situatia">Vezi dacă te regăsești aici</a></div>
 <div>
 <div class="pg-proof"><img alt="" height="15" width="15" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='10' fill='%2322c55e'/%3E%3Cpath d='M6 10l3 3 5-5' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E" /> <span>Trei medici hematologi, o singură echipă: evaluare, diagnostic, tratament, monitorizare</span></div>
 <div class="pg-proof"><img alt="" height="15" width="15" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='10' fill='%2322c55e'/%3E%3Cpath d='M6 10l3 3 5-5' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E" /> <span>Puncție și biopsie medulară, transfuzii și tratamente în perfuzie, în același spital</span></div>
@@ -843,61 +843,6 @@ function hemTab(btn, id){
 </section>
 
 
-<!-- ===================================================== BLOC 07: CUM DECURGE (3 pasi + caseta practica cu date de la client) ===================================================== -->
-<style type="text/css">#cum-decurge .label-tag{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#ec691f;margin-bottom:12px;}
-#cum-decurge .section-title{font-size:1.75rem;font-weight:800;line-height:1.2;margin-bottom:10px;color:#1a1a2e;}
-#cum-decurge .pg-step{background:#fff;border-radius:10px;padding:12px 16px;height:100%;border:1px solid #e8e8e8;}
-#cum-decurge .pg-step .num{width:36px;height:36px;border-radius:50%;background:#ec691f;color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;margin-bottom:10px;}
-#cum-decurge .pg-step h3{font-size:1rem;font-weight:700;color:#1a1a2e;margin-bottom:6px;}
-#cum-decurge .pg-step p{font-size:13.5px;color:#444;line-height:1.6;margin:0;}
-#cum-decurge .col-md-4{margin-bottom:16px;}
-#cum-decurge .cmp{font-size:14px;color:#1a1a2e;line-height:1.65;background:#fff;border-left:3px solid #2d4191;padding:10px 14px;border-radius:0 8px 8px 0;margin:0 0 16px;}
-#cum-decurge .practic{background:#1a1a2e;color:#fff;border-radius:10px;padding:12px 16px;}
-#cum-decurge .practic h3{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#ec691f;margin:0 0 8px;}
-#cum-decurge .practic table{width:100%;font-size:13.5px;border-collapse:collapse;}
-#cum-decurge .practic td{padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.12);vertical-align:top;line-height:1.5;}
-#cum-decurge .practic td:first-child{color:rgba(255,255,255,0.65);width:34%;padding-right:10px;}
-#cum-decurge .practic tr:last-child td{border-bottom:none;}
-#cum-decurge .practic a.tel{color:#fff;font-weight:800;text-decoration:none;font-size:16px;display:inline-block;padding:12px 0;margin:-12px 0;}
-#cum-decurge .practic mark.hem-todo{background:rgba(255,255,255,0.14);color:#fff;}
-@media(max-width:767px){#cum-decurge .section-title{font-size:1.45rem;}}
-</style>
-<section id="cum-decurge" style="background:#f5f7fc;padding:20px 0;">
-<div class="container">
-<div class="row justify-content-center" style="margin-bottom:8px;">
-<div class="col-lg-8 text-center">
-<div class="label-tag">Cum decurge</div>
-<h2 class="section-title">De la prima consultație la monitorizare, în aceeași echipă</h2>
-</div>
-</div>
-<div class="row">
-<div class="col-md-4"><div class="pg-step"><div class="num">1</div><h3>Evaluarea</h3><p>Vii cu buletinul de analize și cu scrisorile medicale pe care le ai. Medicul citește hemograma și frotiul în context, te ascultă și stabilește ce investigații mai sunt necesare: feritină și saturația transferinei, vitamina B12, folat, coagulare, electroforeză, iar la nevoie puncție sau biopsie medulară.</p></div></div>
-<div class="col-md-4"><div class="pg-step"><div class="num">2</div><h3>Diagnosticul</h3><p>Rezultatele se pun cap la cap de aceeași echipă. Primești un diagnostic explicat pe înțelesul tău: ce înseamnă, ce nu înseamnă și care sunt pașii următori. Pentru cazurile complexe, cei trei medici se consultă între ei.</p></div></div>
-<div class="col-md-4"><div class="pg-step"><div class="num">3</div><h3>Tratamentul și monitorizarea</h3><p>Tratamentele în perfuzie sau injecție, transfuziile și controalele se fac în același spital. Bolile care se urmăresc ani de zile (MGUS, hemopatii cronice, tratament anticoagulant) au un calendar de monitorizare, nu vizite la întâmplare.</p></div></div>
-</div>
-<div class="row">
-<div class="col-lg-7">
-<p class="cmp"><strong>Avantajul secției este continuitatea parcursului medical:</strong> evaluarea, investigațiile necesare, tratamentul și monitorizarea pot fi coordonate în cadrul aceleiași echipe, cu acces la laborator, imagistică și oncologie în același spital.</p>
-<p style="font-size:13.5px;color:#444;line-height:1.6;margin:0;">Nu întrerupe niciun tratament înainte de consultație: momentul recoltării unor analize (de exemplu pentru trombofilie) se stabilește împreună cu medicul curant.</p>
-</div>
-<div class="col-lg-5">
-<div class="practic">
-<h3>Unde, cum și cât costă</h3>
-<table>
-<tr><td>Unde</td><td>Spitalul OncoFort Caloian, Str. Caloian Județul nr. 16A, sector 3, București <mark class="hem-todo">de completat: și în ambulatoriu (Clinica de Diagnostic)?</mark></td></tr>
-<tr><td>CAS / CASMB</td><td><mark class="hem-todo">de completat: ce se decontează (consultație, biopsie osteomedulară, spitalizare de zi) și când e nevoie de bilet de trimitere</mark></td></tr>
-<tr><td>Tarife</td><td><mark class="hem-todo">de completat: serviciile cu plată și tarifele care se pot publica</mark></td></tr>
-<tr><td>Ce aduci</td><td>analizele recente și pe cele mai vechi, scrisorile medicale, biletele de externare, lista medicamentelor și a suplimentelor <mark class="hem-todo">de completat: bilet de trimitere, card de sănătate</mark></td></tr>
-<tr><td>Program</td><td><mark class="hem-todo">de completat: programul secției și al ambulatoriului</mark></td></tr>
-<tr><td>Programări</td><td><a class="tel" href="tel:0213230000">021 323 00 00</a><br /><span style="font-size:12px;color:rgba(255,255,255,0.65);">sau formularul din pagină: te sunăm noi</span></td></tr>
-</table>
-</div>
-</div>
-</div>
-</div>
-</section>
-
-
 <!-- ===================================================== BLOC 08: ECHIPA (3 carduri; poze: Tăbleț local pana la profil, Chirilă de pe /storage/doctors/, Stemate de completat) ===================================================== -->
 <style type="text/css">#echipa .label-tag{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#ec691f;margin-bottom:12px;}
 #echipa .section-title{font-size:1.75rem;font-weight:800;line-height:1.2;margin-bottom:10px;color:#1a1a2e;}
@@ -958,36 +903,6 @@ function hemTab(btn, id){
 </div>
 </div>
 <p style="font-size:12px;color:#666;text-align:center;margin:4px 0 0;">Conținut verificat de Dr. Isabela-Ioana Tăbleț, <mark class="hem-todo">de completat: luna și anul validării</mark>.</p>
-</div>
-</section>
-
-
-<!-- ===================================================== BLOC 09: PE CE TE POTI BAZA (dovezi reale din docs/continut.md, sectiunea 5) ===================================================== -->
-<style type="text/css">#incredere{background:#1a1a2e;padding:20px 0;}
-#incredere .label-tag{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#ec691f;margin-bottom:12px;}
-#incredere .section-title{font-size:1.75rem;font-weight:800;line-height:1.2;margin-bottom:10px;color:#fff;}
-#incredere .pg-d{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.14);border-radius:10px;padding:12px 16px;height:100%;}
-#incredere .pg-d h3{font-size:14px;font-weight:800;color:#fff;margin:0 0 6px;line-height:1.35;}
-#incredere .pg-d p{font-size:13px;color:rgba(255,255,255,0.8);line-height:1.6;margin:0;}
-#incredere .pg-d a,#incredere p a{color:#fff;text-decoration:underline;display:inline-block;padding:13px 0;margin:-13px 0;}
-#incredere .col-md-6{margin-bottom:16px;}
-@media(max-width:767px){#incredere .section-title{font-size:1.45rem;}}
-</style>
-<section id="incredere">
-<div class="container">
-<div class="row justify-content-center" style="margin-bottom:8px;">
-<div class="col-lg-8 text-center">
-<div class="label-tag">Încredere</div>
-<h2 class="section-title">Pe ce te poți baza</h2>
-</div>
-</div>
-<div class="row align-items-stretch">
-<div class="col-md-6 col-lg-3"><div class="pg-d"><h3>Un spital, nu un cabinet</h3><p>Numele spitalului nu spune ce ai tu: hematologia nu se rezumă la boli rare, secția vede de la anemia prin lipsă de fier până la bolile maligne ale sângelui. Iar dacă e nevoie, laboratorul, imagistica, biopsia medulară, transfuziile și oncologia sunt în același loc, la <a href="https://www.gralmedical.ro/locatii/spitalul-oncofort-caloian">Spitalul OncoFort Caloian</a>, sector 3, București.</p></div></div>
-<div class="col-md-6 col-lg-3"><div class="pg-d"><h3>Formare de referință</h3><p>UMF „Carol Davila”, Institutul Clinic Fundeni. Medici specialiști hematologi cu experiență în boli benigne și maligne ale sângelui.</p></div></div>
-<div class="col-md-6 col-lg-3"><div class="pg-d"><h3>Societăți profesionale</h3><p>European Hematology Association, Societatea Română de Hematologie, Colegiul Medicilor din România; educație medicală continuă.</p></div></div>
-<div class="col-md-6 col-lg-3"><div class="pg-d"><h3>Explicăm, nu doar tratăm</h3><p><a href="https://hemotalk.ro/" target="_blank" rel="noopener">HemoTalk.ro</a>, proiectul Dr. Tăbleț: o comunitate de zeci de mii de persoane care înțeleg hematologia pe limba lor. Aceeași regulă și în cabinet: pleci știind ce înseamnă analizele tale.</p></div></div>
-</div>
-<p style="font-size:12.5px;color:rgba(255,255,255,0.7);text-align:center;margin:0;line-height:1.6;">GRAL Medical: 17+ ani, <a href="https://www.gralmedical.ro/certificari-si-acreditari-gral-medical" style="color:#fff;text-decoration:underline;">acreditare ANMCS, certificări ISO 9001 și ISO 45001</a>. Testarea genetică pentru <a href="https://www.gralmedical.ro/hematologii-maligne" style="color:#fff;text-decoration:underline;">hematologii maligne</a> se face în rețea.</p>
 </div>
 </section>
 
