@@ -982,8 +982,8 @@ function hemFaq(btn){
 /* panoul cu mini-formular: se deschide din orice buton cu data-hem-open */
 .hem-sheet{position:fixed;inset:0;z-index:1010;display:none;align-items:flex-end;justify-content:center;background:rgba(26,26,46,0.6);padding:0;}
 .hem-sheet.open{display:flex;}
-.hem-sheet .box{background:#1a1a2e;color:#fff;width:100%;max-width:520px;border-radius:16px 16px 0 0;padding:16px 16px 20px;position:relative;box-shadow:0 -10px 40px rgba(0,0,0,0.35);}
-@media(min-width:768px){.hem-sheet{align-items:center;padding:20px;}.hem-sheet .box{border-radius:16px;}}
+.hem-sheet .hem-box{top:auto;left:auto;right:auto;bottom:auto;transform:none;margin:0;max-height:100%;overflow-y:auto;background:#1a1a2e;color:#fff;width:100%;max-width:520px;border-radius:16px 16px 0 0;padding:16px 16px 20px;position:relative;box-shadow:0 -10px 40px rgba(0,0,0,0.35);}
+@media(min-width:768px){.hem-sheet{align-items:center;padding:20px;}.hem-sheet .hem-box{border-radius:16px;}}
 .hem-sheet .x{position:absolute;top:8px;right:8px;width:44px;height:44px;border:0;background:rgba(255,255,255,0.1);color:#fff;border-radius:8px;font-size:22px;line-height:1;cursor:pointer;font-family:inherit;}
 .hem-sheet .t{font-size:17px;font-weight:800;margin:0 44px 4px 0;line-height:1.3;}
 .hem-sheet .s{font-size:13px;color:rgba(255,255,255,0.75);margin:0 0 12px;line-height:1.5;}
@@ -1006,7 +1006,9 @@ function hemFaq(btn){
 .pg-sticky .t small{display:block;font-size:10px;font-weight:700;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:1px;}
 .pg-sticky a,.pg-sticky button{padding:10px 14px;border-radius:6px;font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap;min-height:44px;display:flex;align-items:center;font-family:inherit;cursor:pointer;}
 .pg-sticky a.call{background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.2);}
-.pg-sticky button.book{background:#ec691f;color:#fff;border:0;}}
+.pg-sticky button.book{background:#ec691f;color:#fff;border:0;}
+body{padding-bottom:72px;}#chtl-chat-icon-container{bottom:81px !important;}.div-btn-media-chat{display:none !important;}}
+body.hem-sheet-deschis #chtl-chat-icon-container,body.hem-sheet-deschis .div-btn-media-chat{display:none !important;}
 </style>
 <section id="programeaza" style="background:#1a1a2e;padding:20px 0;">
 <div class="container">
@@ -1036,7 +1038,7 @@ function hemFaq(btn){
 </div>
 </section>
 <div class="hem-sheet" id="hemSheet" role="dialog" aria-modal="true" aria-labelledby="hemSheetT">
-<div class="box">
+<div class="hem-box">
 <button class="x" type="button" data-hem-close="1" aria-label="Închide">&times;</button>
 <p class="t" id="hemSheetT">Spune-ne ce arată analizele. Te sunăm noi.</p>
 <p class="s">Numele și telefonul sunt suficiente. Un coleg de la call center te sună și îți spune la ce medic te programăm și ce aduci.</p>
@@ -1082,11 +1084,11 @@ function hemFaq(btn){
   var sheet = document.getElementById('hemSheet');
   function openSheet(sursa){
     if(!sheet){ return; }
-    sheet.classList.add('open');
+    sheet.classList.add('open'); document.body.classList.add('hem-sheet-deschis');
     var f = sheet.querySelector('form'); if(f){ f.setAttribute('data-sursa', 'panou-' + (sursa || 'buton')); }
     var inp = sheet.querySelector('input[name=nume]'); if(inp){ setTimeout(function(){ inp.focus(); }, 60); }
   }
-  function closeSheet(){ if(sheet){ sheet.classList.remove('open'); } }
+  function closeSheet(){ if(sheet){ sheet.classList.remove('open'); } document.body.classList.remove('hem-sheet-deschis'); }
   document.addEventListener('click', function(e){
     if(!e.target.closest){ return; }
     var o = e.target.closest('[data-hem-open]');
