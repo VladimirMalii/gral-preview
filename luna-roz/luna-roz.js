@@ -60,16 +60,23 @@
         pas: 20,
         coduri: { consult: ["CC001"] },
       },
-      // Dr. Toader Horia (adaugat 27.10.2026): calendarul online e pe Clinica GRAL Stefan cel Mare (loc 10, spec 26), grila 30 min
+      // Dr. Toader Horia (adaugat 27.10.2026). In perioada campaniei nu are ore in programarea online; pe 29.10 are ore libere
+      // confirmate de call center (programul Medis: Radiologie Diag., sala Angio, Traian Popovici), puse in oreManuale.
+      // O ora din oreManuale nu se reverifica online si pleaca la call center ca zi preferata, cu ora in observatii.
       146599: {
         nume: "Dr. Toader Horia",
         grad: "Medic specialist Chirurgie plastică, microchirurgie reconstructivă",
-        afisare: "Dr. Toader Horia, Clinica GRAL Ștefan cel Mare",
-        loc: 10,
+        afisare: "Dr. Toader Horia, Str. Traian Popovici nr. 79-91",
+        loc: 7,
         spec: 26,
         city: 1,
         pas: 30,
         coduri: { consult: ["CC001"] },
+        oreManuale: {
+          "2026-10-29": ["15:30", "16:00", "16:30", "17:00", "17:30"],
+        },
+        locManual:
+          "Radiologie Diag., sala Angio, Str. Traian Popovici nr. 79-91",
       },
       // Bucuresti, Clinica GRAL Stefan cel Mare (loc 10)
       146548: {
@@ -230,10 +237,10 @@
         titlu: "Consult gratuit de chirurgie plastică și reconstructivă",
         reducere: "gratuit pentru pacientele oncologice",
         clinica:
-          "Centrul de Chirurgie GRAL, Str. Traian Popovici nr. 79-91, București (Dr. Dumitrescu Andrei) și Clinica GRAL Ștefan cel Mare, Șos. Ștefan cel Mare nr. 230, București (Dr. Toader Horia)",
+          "Centrul de Chirurgie GRAL, Str. Traian Popovici nr. 79-91, București",
         intrebare: "onco",
-        // rand afisat la pasul 1, urmat de telefon (cerut 27.10.2026: Dr. Toader are ore online doar dupa campanie)
-        nota: "Pentru disponibilitatea Dr. Toader Horia (Clinica GRAL Ștefan cel Mare), sună la",
+        // rand afisat la pasul 1, urmat de telefon (cerut 27.10.2026)
+        nota: "Pentru alte ore la Dr. Toader Horia, sună la",
         s1: {
           cheie: "consult",
           nume: "Consult chirurgie plastică și reconstructivă",
@@ -472,8 +479,24 @@
           S[r.id][z] = r.d[z];
         });
       });
+      // orele confirmate de call center care nu sunt in programarea online (doar medicii cu oreManuale)
+      mediciPachet(p).forEach(function (id) {
+        var man = CFG.medici[id].oreManuale || {};
+        Object.keys(man).forEach(function (z) {
+          S[id] = S[id] || {};
+          var ore = (S[id][z] || []).slice();
+          man[z].forEach(function (h) {
+            if (ore.indexOf(h) < 0) ore.push(h);
+          });
+          S[id][z] = ore.sort();
+        });
+      });
       return S;
     });
+  }
+  function oraManuala(id, zi, h) {
+    var m = (CFG.medici[id].oreManuale || {})[zi];
+    return !!m && m.indexOf(h) >= 0;
   }
 
   /* ---------- combinarea: intai serviciul 1, apoi serviciul 2 in aceeasi zi, pauza 0..pauzaMax; un singur serviciu = orele lui ---------- */
@@ -1003,6 +1026,27 @@
             : "") +
           ".",
       );
+    } else if (!p.s2 && oraManuala(x.a, x.zi, x.ha)) {
+      r.push(
+        "ORA ALEASA: " +
+          ziFrumos(x.zi) +
+          ", ora " +
+          x.ha +
+          ", " +
+          p.s1.nume +
+          ", " +
+          CFG.medici[x.a].nume +
+          (CFG.medici[x.a].locManual
+            ? " (" + CFG.medici[x.a].locManual + ")"
+            : "") +
+          ".",
+      );
+      r.push(
+        "ATENTIE: ora e din programul confirmat de call center, nu din programarea online (cererea e trimisa ca zi preferata).",
+      );
+      r.push(
+        "DE FACUT: sunati pacienta si confirmati programarea la aceasta ora.",
+      );
     } else {
       r.push(
         "PROGRAMAREA 1: " +
@@ -1060,14 +1104,16 @@
         coduri_medis: (m.coduri || {})[s.cheie] || [],
       };
     }
-    var servicii = [serv(1, p.s1, x.a, x.ha)];
+    // ora din oreManuale: pleaca pe calea „zi preferata” (fara ora in Medis), ora aleasa e in observatii
+    var man = !x.pref && !p.s2 && oraManuala(x.a, x.zi, x.ha);
+    var servicii = [serv(1, p.s1, x.a, man ? null : x.ha)];
     if (p.s2) servicii.push(serv(2, p.s2, x.b, x.hb));
     return {
       pachet: st.cheie,
-      mod: x.pref ? "preferinta" : "ore",
+      mod: x.pref ? "preferinta" : man ? "ora-confirmata-cc" : "ore",
       zi: x.zi,
-      zi_form: x.pref ? "" : ziForm(x.zi),
-      favorite_form: x.pref ? ziForm(x.zi) : "",
+      zi_form: x.pref || man ? "" : ziForm(x.zi),
+      favorite_form: x.pref || man ? ziForm(x.zi) : "",
       interval: x.pref ? x.interval : "",
       pacienta: {
         nume: d.nume,
@@ -1097,13 +1143,14 @@
     $$(".lr-err").forEach(function (e) {
       e.parentNode.removeChild(e);
     }); // mesajul erorii anterioare nu mai e valabil
-    // 1. reverificam ca orele alese mai sunt libere (nu si la zi preferata: nu are ore)
-    var verif = x.pref
-      ? Promise.resolve(null)
-      : Promise.all([
-          sloturiZi(x.a, x.zi),
-          p.s2 ? sloturiZi(x.b, x.zi) : Promise.resolve([]),
-        ]);
+    // 1. reverificam ca orele alese mai sunt libere (nu si la zi preferata: nu are ore; nici la o ora din oreManuale: nu e online)
+    var verif =
+      x.pref || (!p.s2 && oraManuala(x.a, x.zi, x.ha))
+        ? Promise.resolve(null)
+        : Promise.all([
+            sloturiZi(x.a, x.zi),
+            p.s2 ? sloturiZi(x.b, x.zi) : Promise.resolve([]),
+          ]);
     verif
       .then(function (r) {
         if (r) {
