@@ -5,6 +5,7 @@ echo === Actualizeaza drafturile publicate (dupa ce Claude a regenerat fisierele
 copy /y "D:\Gral Website\Gral-Hematologie\livrare\hematologie-gral-caloian.html" hematologie\index.html >nul
 copy /y "D:\Gral Website\Paliatie\livrare\ingrijiri-paliative-gral.html" paliatie\index.html >nul
 copy /y "D:\Gral Website\ONCOFORT\Pagina cancere\decizie\web\livrare\cancerul-colorectal-oncofort.html" colorectal\index.html >nul
+copy /y "D:\Gral Website\Chatbot\medici-fara-programare-online\livrare\medici-fara-programare-online.html" chatbot\index.html >nul
 python noindex.py
 git add -A
 git -c user.name="Gral Website" -c user.email="noreply@gralmedical.ro" commit -m "Actualizare drafturi %date% %time%"
