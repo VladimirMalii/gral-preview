@@ -232,6 +232,8 @@
         clinica:
           "Centrul de Chirurgie GRAL, Str. Traian Popovici nr. 79-91, București (Dr. Dumitrescu Andrei) și Clinica GRAL Ștefan cel Mare, Șos. Ștefan cel Mare nr. 230, București (Dr. Toader Horia)",
         intrebare: "onco",
+        // rand afisat la pasul 1, urmat de telefon (cerut 27.10.2026: Dr. Toader are ore online doar dupa campanie)
+        nota: "Pentru disponibilitatea Dr. Toader Horia (Clinica GRAL Ștefan cel Mare), sună la",
         s1: {
           cheie: "consult",
           nume: "Consult chirurgie plastică și reconstructivă",
@@ -622,6 +624,18 @@
   function afisat(id) {
     return CFG.medici[id].afisare || CFG.medici[id].nume;
   } // medicul, sau locul (mamografia nu se alege pe medic)
+  function notaHtml(p) {
+    // randul optional al pachetului (p.nota) + telefonul call center-ului; doar la pachetele care il au
+    return p.nota
+      ? '<p class="lr-mic lr-nota" style="margin:0 0 10px">' +
+          esc(p.nota) +
+          ' <a class="lr-tel" href="' +
+          CFG.telHref +
+          '">' +
+          esc(CFG.telefon) +
+          "</a>.</p>"
+      : "";
+  }
   function ambele(p) {
     return p.s2 ? "ambele servicii" : p.s1.nume.toLowerCase();
   }
@@ -645,6 +659,7 @@
             '<p class="lr-gol" style="margin:0 0 12px">Momentan nu sunt ore libere online pentru ' +
             esc(ambele(p)) +
             " în perioada campaniei. Alege o zi preferată și te sună un operator GRAL Medical ca să stabilească orele.</p>" +
+            notaHtml(p) +
             '<button type="button" class="lr-btn" id="lr-pref">Alege ziua preferată</button>';
         } else {
           h +=
@@ -670,7 +685,9 @@
               "</span></button>";
           });
           h +=
-            '</div><p class="lr-mic">Nu găsești o zi potrivită? <button type="button" class="lr-btn2" id="lr-pref" style="padding:0;min-height:0">Alege o zi preferată</button> și te sunăm noi pentru ore.</p>';
+            "</div>" +
+            notaHtml(p) +
+            '<p class="lr-mic">Nu găsești o zi potrivită? <button type="button" class="lr-btn2" id="lr-pref" style="padding:0;min-height:0">Alege o zi preferată</button> și te sunăm noi pentru ore.</p>';
         }
         corp(h);
         $$(".lr-zi").forEach(function (b) {
