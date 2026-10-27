@@ -60,6 +60,17 @@
         pas: 20,
         coduri: { consult: ["CC001"] },
       },
+      // Dr. Toader Horia (adaugat 27.10.2026): calendarul online e pe Clinica GRAL Stefan cel Mare (loc 10, spec 26), grila 30 min
+      146599: {
+        nume: "Dr. Toader Horia",
+        grad: "Medic specialist Chirurgie plastică, microchirurgie reconstructivă",
+        afisare: "Dr. Toader Horia, Clinica GRAL Ștefan cel Mare",
+        loc: 10,
+        spec: 26,
+        city: 1,
+        pas: 30,
+        coduri: { consult: ["CC001"] },
+      },
       // Bucuresti, Clinica GRAL Stefan cel Mare (loc 10)
       146548: {
         nume: "Dr. Dumitru Andreea Elena",
@@ -219,12 +230,12 @@
         titlu: "Consult gratuit de chirurgie plastică și reconstructivă",
         reducere: "gratuit pentru pacientele oncologice",
         clinica:
-          "Centrul de Chirurgie GRAL, Str. Traian Popovici nr. 79-91, București",
+          "Centrul de Chirurgie GRAL, Str. Traian Popovici nr. 79-91, București (Dr. Dumitrescu Andrei) și Clinica GRAL Ștefan cel Mare, Șos. Ștefan cel Mare nr. 230, București (Dr. Toader Horia)",
         intrebare: "onco",
         s1: {
           cheie: "consult",
           nume: "Consult chirurgie plastică și reconstructivă",
-          medici: [146643],
+          medici: [146643, 146599], // primul ramane medicul implicit la „zi preferata”
         },
       },
       "stefan-p1": {
@@ -944,6 +955,7 @@
   // Etichete majuscule + un rand per informatie: lizibil si daca e-mailul uneste randurile. Fara coduri / vouchere.
   function medicLoc(id) {
     var m = CFG.medici[id];
+    if (m.afisare && m.afisare.indexOf(m.nume) === 0) return m.afisare; // afisarea contine deja numele (Dr. Toader)
     return m.nume + (m.afisare ? ", " + m.afisare : "");
   }
   function textObs(p, x, d) {
